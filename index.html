@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PERRX - El Blanquito Extranjero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Russo+One&family=Permanent+Marker&family=Bangers&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Russo One', sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            color: #1a1a1a;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 20px;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 5px;
+            background: #f5f5f5;
+            padding: 5px;
+            border-radius: 25px;
+        }
+        .lang-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            font-family: 'Russo One', sans-serif;
+            font-size: 14px;
+            color: #999;
+            cursor: pointer;
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+        .lang-btn.active {
+            background: #1a1a1a;
+            color: white;
+        }
+        .lang-btn:hover:not(.active) {
+            color: #1a1a1a;
+        }
+        
+        /* Hero */
+        .hero { text-align: center; padding: 40px 20px; }
+        .hero-label {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(14px, 3vw, 18px);
+            color: #666;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        
+        .artist-name {
+            font-family: 'Bungee Shade', cursive;
+            font-size: clamp(60px, 15vw, 140px);
+            background: linear-gradient(180deg, #1a1a1a 0%, #444 50%, #666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 10px;
+            line-height: 1;
+        }
+        .album-title {
+            font-family: 'Permanent Marker', cursive;
+            font-size: clamp(24px, 6vw, 48px);
+            color: #333;
+            margin-top: 20px;
+            transform: rotate(-2deg);
+        }
+        .release-date {
+            font-family: 'Bangers', cursive;
+            font-size: clamp(18px, 4vw, 24px);
+            margin-top: 30px;
+        }
+        .release-date span {
+            background: #1a1a1a;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            animation: bounce 1s ease infinite;
+        }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        /* Video Section */
+        .video-section {
+            margin: 50px auto;
+            max-width: 900px;
+            padding: 0 20px;
+        }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background: #1a1a1a;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-family: 'Russo One', sans-serif;
+        }
+        .video-placeholder-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+        .video-placeholder-text {
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        /* CTA */
+        .cta-section { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 50px 0; }
+        .cta-btn {
+            font-family: 'Bangers', cursive;
+            font-size: 22px;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            letter-spacing: 2px;
+        }
+        .cta-primary {
+            background: #1a1a1a;
+            color: white;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        .cta-primary:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); }
+        .cta-secondary {
+            background: #ccc;
+            color: #888;
+            border: 3px solid #ccc;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* Streaming */
+        .streaming-section { text-align: center; padding: 40px 20px; }
+        .streaming-title { font-family: 'Bangers', cursive; font-size: 28px; color: #333; margin-bottom: 30px; letter-spacing: 4px; }
+        .streaming-links { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .stream-btn {
+            display: flex; align-items: center; gap: 10px;
+            padding: 15px 30px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-family: 'Russo One', sans-serif;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .stream-btn:hover { border-color: #1a1a1a; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .stream-btn svg { width: 24px; height: 24px; }
+
+        /* Merch */
+        .merch-section {
+            padding: 60px 20px;
+            background: #f5f5f5;
+            border-radius: 30px;
+            margin: 40px 0;
+        }
+        .section-title {
+            font-family: 'Bungee Shade', cursive;
+            font-size: clamp(32px, 8vw, 52px);
+            text-align: center;
+            margin-bottom: 50px;
+            color: #1a1a1a;
+        }
+        .tshirts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .tshirt-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            opacity: 0.6;
+        }
+        .tshirt-badge {
+            position: absolute; top: 15px; right: 15px;
+            background: #999; color: white;
+            font-family: 'Bangers', cursive;
+            padding: 5px 15px; border-radius: 20px;
+            font-size: 14px;
+        }
+        .tshirt-preview {
+            width: 180px; height: 200px; margin: 0 auto 20px;
+            background: linear-gradient(180deg, #e8e8e8, #d8d8d8);
+            border-radius: 10px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            position: relative;
+            filter: grayscale(100%);
+        }
+        .tshirt-shape { font-size: 100px; opacity: 0.5; }
+        .tshirt-design {
+            position: absolute;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 14px; color: #999;
+            text-align: center; line-height: 1.2;
+        }
+        .tshirt-name { font-family: 'Permanent Marker', cursive; font-size: 24px; color: #999; margin-bottom: 10px; }
+        .tshirt-price { font-family: 'Bangers', cursive; font-size: 32px; color: #999; margin-bottom: 20px; text-decoration: line-through; }
+        .size-selector { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; }
+        .size-btn {
+            width: 40px; height: 40px;
+            border: 2px solid #ddd;
+            background: #f5f5f5; color: #bbb;
+            font-family: 'Russo One', sans-serif; font-size: 14px;
+            border-radius: 8px;
+            cursor: not-allowed;
+        }
+        .buy-btn {
+            width: 100%; padding: 15px;
+            background: #ccc;
+            border: none; border-radius: 12px;
+            cursor: not-allowed;
+            font-size: 16px;
+            font-family: 'Bangers', cursive; letter-spacing: 1px;
+            color: #888;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+
+        /* Footer */
+        footer { text-align: center; padding: 40px 20px; border-top: 1px solid #e0e0e0; margin-top: 40px; }
+        .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; }
+        .social-link {
+            width: 50px; height: 50px;
+            border: 2px solid #ddd; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease; background: white;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+        .social-link:hover { border-color: #1a1a1a; transform: scale(1.1); background: #f5f5f5; }
+        .social-link svg { width: 24px; height: 24px; }
+        .copyright { color: #999; font-size: 14px; }
+
+        @media (max-width: 768px) {
+            .hero { padding: 20px 15px; }
+            .tshirts-grid { grid-template-columns: 1fr; }
+            .cta-section { flex-direction: column; align-items: center; }
+            .cta-btn { width: 100%; max-width: 300px; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Language Switch -->
+    <header class="header">
+        <div class="lang-switch">
+            <button class="lang-btn active" data-lang="es" onclick="switchLang('es')">ES</button>
+            <button class="lang-btn" data-lang="en" onclick="switchLang('en')">EN</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <p class="hero-label" data-es="🤍 NUEVO ÁLBUM 🤍" data-en="🤍 NEW ALBUM 🤍">🤍 NUEVO ÁLBUM 🤍</p>
+            <h1 class="artist-name">PERRX</h1>
+            <h2 class="album-title">"El Blanquito Extranjero"</h2>
+            <p class="release-date"><span data-es="🤍 YA DISPONIBLE 🤍" data-en="🤍 OUT NOW 🤍">🤍 YA DISPONIBLE 🤍</span></p>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="video-wrapper">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    <span class="video-placeholder-icon">▶️</span>
+                    <span class="video-placeholder-text" data-es="VIDEO PRÓXIMAMENTE" data-en="VIDEO COMING SOON">VIDEO PRÓXIMAMENTE</span>
+                </div>
+                <!-- Uncomment and add your video ID: -->
+                <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID?rel=0&modestbranding=1" allowfullscreen></iframe> -->
+            </div>
+        </section>
+
+        <div class="cta-section">
+            <a href="#" class="cta-btn cta-primary" data-es="▶️ ESCUCHAR AHORA" data-en="▶️ LISTEN NOW">▶️ ESCUCHAR AHORA</a>
+            <a href="#merch" class="cta-btn cta-secondary" data-es="🤍 AGOTADO" data-en="🤍 SOLD OUT">🤍 AGOTADO</a>
+        </div>
+
+        <section class="streaming-section">
+            <h3 class="streaming-title" data-es="🤍 DISPONIBLE EN 🤍" data-en="🤍 AVAILABLE ON 🤍">🤍 DISPONIBLE EN 🤍</h3>
+            <div class="streaming-links">
+                <a href="#" class="stream-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    Spotify
+                </a>
+                <a href="#" class="stream-btn">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"/></svg>
+                    YouTube
+                </a>
+            </div>
+        </section>
+
+        <section class="merch-section" id="merch">
+            <h2 class="section-title" data-es="🤍 MERCH AGOTADO 🤍" data-en="🤍 MERCH SOLD OUT 🤍">🤍 MERCH AGOTADO 🤍</h2>
+            <div class="tshirts-grid">
+                <div class="tshirt-card">
+                    <span class="tshirt-badge" data-es="AGOTADO 🤍" data-en="SOLD OUT 🤍">AGOTADO 🤍</span>
+                    <div class="tshirt-preview">
+                        <span class="tshirt-shape">👕</span>
+                        <span class="tshirt-design">PERRX<br>BLANQUITO</span>
+                    </div>
+                    <h3 class="tshirt-name">"BLANQUITO" TEE</h3>
+                    <p class="tshirt-price">$35</p>
+                    <div class="size-selector">
+                        <button class="size-btn" disabled>S</button>
+                        <button class="size-btn" disabled>M</button>
+                        <button class="size-btn" disabled>L</button>
+                        <button class="size-btn" disabled>XL</button>
+                    </div>
+                    <button class="buy-btn" disabled data-es="🤍 AGOTADO" data-en="🤍 SOLD OUT">🤍 AGOTADO</button>
+                </div>
+                <div class="tshirt-card">
+                    <span class="tshirt-badge" data-es="AGOTADO 🤍" data-en="SOLD OUT 🤍">AGOTADO 🤍</span>
+                    <div class="tshirt-preview">
+                        <span class="tshirt-shape">👕</span>
+                        <span class="tshirt-design">🤍<br>EXTRANJERO</span>
+                    </div>
+                    <h3 class="tshirt-name">"EXTRANJERO" TEE</h3>
+                    <p class="tshirt-price">$40</p>
+                    <div class="size-selector">
+                        <button class="size-btn" disabled>S</button>
+                        <button class="size-btn" disabled>M</button>
+                        <button class="size-btn" disabled>L</button>
+                        <button class="size-btn" disabled>XL</button>
+                    </div>
+                    <button class="buy-btn" disabled data-es="🤍 AGOTADO" data-en="🤍 SOLD OUT">🤍 AGOTADO</button>
+                </div>
+                <div class="tshirt-card">
+                    <span class="tshirt-badge" data-es="AGOTADO 🤍" data-en="SOLD OUT 🤍">AGOTADO 🤍</span>
+                    <div class="tshirt-preview">
+                        <span class="tshirt-shape">👕</span>
+                        <span class="tshirt-design">PERRX<br>🤍🤍🤍</span>
+                    </div>
+                    <h3 class="tshirt-name">"PERRX" TEE</h3>
+                    <p class="tshirt-price">$45</p>
+                    <div class="size-selector">
+                        <button class="size-btn" disabled>S</button>
+                        <button class="size-btn" disabled>M</button>
+                        <button class="size-btn" disabled>L</button>
+                        <button class="size-btn" disabled>XL</button>
+                    </div>
+                    <button class="buy-btn" disabled data-es="🤍 AGOTADO" data-en="🤍 SOLD OUT">🤍 AGOTADO</button>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://instagram.com/internet.perrx" target="_blank" rel="noopener" class="social-link" title="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </a>
+                <a href="#" class="social-link" title="Spotify">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                </a>
+            </div>
+            <p class="copyright">© 2025 PERRX 🤍</p>
+        </footer>
+    </div>
+
+    <script>
+        function switchLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            document.querySelectorAll('[data-es][data-en]').forEach(el => {
+                el.textContent = el.dataset[lang];
+            });
+            document.documentElement.lang = lang;
+            localStorage.setItem('perrx-lang', lang);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('perrx-lang') || 'es';
+            switchLang(savedLang);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
