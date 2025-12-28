@@ -93,14 +93,32 @@
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: block;
         }
-        .video-wrapper iframe {
+        .video-link {
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .video-link:hover .play-button svg path:first-child {
+            fill: #444;
+        }
+        .video-thumbnail {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: cover;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease;
+        }
+        .video-link:hover .play-button {
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         /* CTA */
@@ -261,14 +279,18 @@
 
         <!-- Video Section -->
         <section class="video-section">
-            <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/DzwX7fAJeJA?rel=0&modestbranding=1" allowfullscreen></iframe>
-            </div>
+            <a href="https://www.youtube.com/watch?v=DzwX7fAJeJA" target="_blank" rel="noopener" class="video-wrapper video-link">
+                <img src="https://img.youtube.com/vi/DzwX7fAJeJA/maxresdefault.jpg" alt="PERRX - El Blanquito Extranjero" class="video-thumbnail">
+                <div class="play-button">
+                    <svg viewBox="0 0 68 48" width="68" height="48">
+                        <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#212121"/>
+                        <path d="M45 24L27 14v20" fill="#fff"/>
+                    </svg>
+                </div>
+            </a>
         </section>
 
-        <div class="cta-section">
-            <a href="https://open.spotify.com/track/6LJw1E31N9vRnbI5p4HeaZ?si=lt1NE6ReTDqCqZYE0xHNMA" target="_blank" rel="noopener" class="cta-btn cta-primary" data-es="▶️ ESCUCHAR AHORA" data-en="▶️ LISTEN NOW">▶️ ESCUCHAR AHORA</a>
-        </div>
+
 
         <section class="streaming-section">
             <h3 class="streaming-title" data-es="🤍 DISPONIBLE EN 🤍" data-en="🤍 AVAILABLE ON 🤍">🤍 DISPONIBLE EN 🤍</h3>
